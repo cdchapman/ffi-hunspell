@@ -118,8 +118,8 @@ module FFI
 
       alias << add
 
-      def add_affix(word,example)
-        Hunspell.Hunspell_add_affix(self,word.to_s,example.to_s)
+      def add_with_affix(word,example)
+        Hunspell.Hunspell_add_with_affix(self,word.to_s,example.to_s)
       end
 
       #
