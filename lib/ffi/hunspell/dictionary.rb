@@ -109,20 +109,37 @@ module FFI
       #
       # Adds a word to the dictionary.
       #
-      # @param [String] word
+      # @param [#to_s] word
       #   The word to add to the dictionary.
       #
       def add(word)
         Hunspell.Hunspell_add(self,word.to_s)
       end
 
-      alias << add
-
+      #
+      # Adds a word to the dictionary with affix flags.
+      #
+      # @param [#to_s] word
+      #   The word to add to the dictionary.
+      #
+      # @param [#to_s] example
+      #   Affix flags.
+      #
+      # @since 0.4.0
+      #
       def add_with_affix(word,example)
         Hunspell.Hunspell_add_with_affix(self,word.to_s,example.to_s)
       end
 
       #
+      # @deprecated Please use {#add_with_affix} instead.
+      #
+      def add_affix(word,example)
+        add_with_affix(word,example)
+      end
+
+      alias << add
+
       # Load an extra dictionary file. The extra dictionaries use the
       # affix file of the allocated Hunspell object.
       #
@@ -146,7 +163,7 @@ module FFI
       #
       # Removes a word from the dictionary.
       #
-      # @param [String] word
+      # @param [#to_s] word
       #   The word to remove.
       #
       def remove(word)
@@ -158,7 +175,7 @@ module FFI
       #
       # Checks if the word is validate.
       #
-      # @param [String] word
+      # @param [#to_s] word
       #   The word in question.
       #
       # @return [Boolean]
@@ -173,7 +190,7 @@ module FFI
       #
       # Finds the stems of a word.
       #
-      # @param [String] word
+      # @param [#to_s] word
       #   The word in question.
       #
       # @return [Array<String>]
@@ -197,7 +214,7 @@ module FFI
       #
       # Suggests alternate spellings of a word.
       #
-      # @param [String] word
+      # @param [#to_s] word
       #   The word in question.
       #
       # @return [Array<String>]
